@@ -38,7 +38,7 @@ std::ostream& operator <<(std::ostream& cout_,const Vector2d& r){
     return cout_;
 }
 QTextStream &operator <<(QTextStream &s, const Vector2d &r){
-    return s << " "<<r.x<<" "<<r.y;
+    return s<<r.x<<" "<<r.y;
 }
 
 

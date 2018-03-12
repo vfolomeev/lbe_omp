@@ -3,6 +3,7 @@
 #include "math_api.h"
 #include "omp.h"
 #include <time.h>
+#include "QFile"
 solver::solver()
 {
 
@@ -128,6 +129,18 @@ omp_set_num_threads(4);
 
    qDebug()<<   " time on wall: " <<  omp_get_wtime() - wall_timer << "\n";
    //writing results file
+   QFile file("D:\\Development\\2d_convection_omp\\res.csv");
+   file.open(QIODevice::WriteOnly);
+   QTextStream results(&file);
+   results<<"X  Y   Z   u   v   w \n";
+   for(i=0;i<n;i++){
+       for(j=0;j<m;j++){
+           results<<i<<"    "<<j<<" 0   "<<u[i][j]<<"  0"<<"\n";
+       }
+
+   }
+   file.flush();
+   file.close();
 
     for (i=0; i<N; i++)//Пробегаем по всем точкам
     {
