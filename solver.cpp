@@ -96,8 +96,9 @@ omp_set_num_threads(4);
            }
 
        }
-        qDebug()<<u[50][50];
+
         //streaming
+#pragma omp parallel for private(i,j)
         for(k=0;k<9;k++){
             if(k!=ind(0,0)){
                 auto run_contraction=Vector2d(c[k].x*c[k].x,c[k].y*c[k].y);
