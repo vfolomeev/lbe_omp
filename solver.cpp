@@ -51,7 +51,7 @@ void solver::iterate(double *x1,double *y1,int N){
             if((c[k]*c[k])==0) w[k]=4./9;
             if(c[k]*c[k]==1) w[k]=1./9;
             if(c[k]*c[k]==2) w[k]=1./36;
-            qDebug()<<c[k]<<"   "<<w[k];
+            
         }
     }
 
@@ -142,20 +142,18 @@ omp_set_num_threads(4);
 //            }
 //        }
         //boundary conditions
-#pragma omp parallel for private(i,rhon)
+#pragma omp parallel for private(i,j,rhon)
         for(i=0;i<m;i++){
+            for(j=-1;j<2;j++){
             //x=0 bounce back
-            f[0][i][ind(1,0)]=f[0][i][ind(-1,0)];
-            f[0][i][ind(1,1)]=f[0][i][ind(-1,-1)];
-            f[0][i][ind(1,-1)]=f[0][i][ind(-1,1)];
+                f[0][i][ind(1,j)]=f[0][i][ind(-1,-j)];
+
             //x=l bounce back
-            f[n-1][i][ind(-1,0)]=f[n-1][i][ind(1,0)];
-            f[n-1][i][ind(-1,-1)]=f[n-1][i][ind(1,1)];
-            f[n-1][i][ind(-1,1)]=f[n-1][i][ind(1,-1)];
+                f[n-1][i][ind(-1,j)]=f[n-1][i][ind(1,-j)];
+
             //y=0 bounce back
-            f[i][0][ind(1,1)]=f[i][0][ind(-1,-1)];
-            f[i][0][ind(0,1)]=f[i][0][ind(0,-1)];
-            f[i][0][ind(-1,1)]=f[i][0][ind(1,-1)];
+                f[i][0][ind(j,1)]=f[i][0][ind(-j,-1)];
+            }
             //y=l moving lid
             rhon=f[i][m-1][ind(0,0)]+f[i][m-1][ind(1,0)]+f[i][m-1][ind(-1,0)]+2.*(f[i][m-1][ind(0,1)]+f[i][m-1][ind(-1,1)]+f[i][m-1][ind(1,1)]);
             f[i][m-1][ind(-1,-1)]=f[i][m-1][ind(1,1)]-rhon*u0/6.;
