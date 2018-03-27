@@ -6,34 +6,35 @@
 #include <math.h>
 #include "QTextStream"
 #include "QDebug"
-inline int ind(int i,int j){
-    return (i+1)*3+(j+1);
+inline int ind(int i,int j,int k){
+    return (i+1)*9+(j+1)*3+(k+1);
 }
 
-class Vector2d{
+class Vector3d{
 public:
     double x;
     double y;
-    Vector2d();
-    Vector2d(double a);
-    Vector2d(double a,double b);
+    double z;
+    Vector3d();
+    Vector3d(double a);
+    Vector3d(double a,double b,double c);
 
     double mag();
-    Vector2d  operator % (Vector2d a);
+    Vector3d  operator % (Vector3d a);
 
-    friend Vector2d operator+(Vector2d a,Vector2d b);
+    friend Vector3d operator+(Vector3d a,Vector3d b);
 
-    friend Vector2d operator*(double a,Vector2d b);
+    friend Vector3d operator*(double a,Vector3d b);
 
-    friend Vector2d operator*(Vector2d a,double b);
+    friend Vector3d operator*(Vector3d a,double b);
 
-    friend double operator*(Vector2d a,Vector2d b);
+    friend double operator*(Vector3d a,Vector3d b);
 
-    friend Vector2d operator>=(Vector2d a,Vector2d b);
+    friend Vector3d operator>=(Vector3d a,Vector3d b);
 
-    friend Vector2d operator<=(Vector2d a,Vector2d b);
+    friend Vector3d operator<=(Vector3d a,Vector3d b);
 
 };
-QDebug operator<< (QDebug out,const Vector2d &r);
-QTextStream &operator <<(QTextStream &s, const Vector2d &r);
-std::ostream& operator <<(std::ostream& cout_,const Vector2d r);
+QDebug operator<< (QDebug out,const Vector3d &r);
+QTextStream &operator <<(QTextStream &s, const Vector3d &r);
+std::ostream& operator <<(std::ostream& cout_,const Vector3d r);

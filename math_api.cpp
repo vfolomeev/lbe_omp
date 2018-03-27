@@ -2,61 +2,62 @@
 #include "math_api.h"
 
 
-//Vector2d
+//Vector3d
 
-Vector2d operator+(Vector2d a,Vector2d b){
+Vector3d operator+(Vector3d a,Vector3d b){
     double x=a.x+b.x;
     double y=a.y+b.y;
-    return Vector2d(x,y);
+    double z=a.z+b.z;
+    return Vector3d(x,y,z);
 }
 
-Vector2d operator*(double a,Vector2d b){
-    return Vector2d(a*b.x,a*b.y);
+Vector3d operator*(double a,Vector3d b){
+    return Vector3d(a*b.x,a*b.y,a*b.z);
 }
 
-Vector2d operator*(Vector2d a,double b){
-    return Vector2d(b*a.x,b*a.y);
+Vector3d operator*(Vector3d a,double b){
+    return Vector3d(b*a.x,b*a.y,b*a.z);
 }
 
-double operator*(Vector2d a,Vector2d b){
-    return a.x*b.x+a.y*b.y;
+double operator*(Vector3d a,Vector3d b){
+    return a.x*b.x+a.y*b.y+a.z*b.z;
 }
 
-Vector2d operator>=(Vector2d a,Vector2d b){
-    return Vector2d(a.x>=b.x,a.y>=b.y);
+Vector3d operator>=(Vector3d a,Vector3d b){
+    return Vector3d(a.x>=b.x,a.y>=b.y,a.z>=b.z);
 }
 
-Vector2d operator<=(Vector2d a,Vector2d b){
-    return Vector2d(a.x<=b.x,a.y<=b.y);
+Vector3d operator<=(Vector3d a,Vector3d b){
+    return Vector3d(a.x<=b.x,a.y<=b.y,a.z<=b.z);
 }
 
 
-Vector2d::Vector2d(){
-    x=0;y=0;
+Vector3d::Vector3d(){
+    x=0;y=0;z=0;
 }
 
-Vector2d::Vector2d(double a){
-    x=a;y=a;
+Vector3d::Vector3d(double a){
+    x=a;y=a;z=a;
 }
 
-Vector2d::Vector2d(double a,double b){
-    x=a;y=b;
+Vector3d::Vector3d(double a,double b,double c){
+    x=a;y=b;z=c;
 }
 
-double Vector2d::mag(){
-    return sqrt(x*x+y*y);
+double Vector3d::mag(){
+    return sqrt(x*x+y*y+z*z);
 }
-QDebug operator<< (QDebug out,const Vector2d &r){
-    out<<" "<<r.x<<" "<<r.y;
+QDebug operator<< (QDebug out,const Vector3d &r){
+    out<<" "<<r.x<<" "<<r.y<<"  "<<r.z;
     return out.maybeSpace();
 }
-std::ostream& operator <<(std::ostream& cout_,const Vector2d & r){
-    cout_<<" "<<r.x<<" "<<r.y;
+std::ostream& operator <<(std::ostream& cout_,const Vector3d & r){
+    cout_<<" "<<r.x<<" "<<r.y<<"  "<<r.z;
     return cout_;
 }
 
-QTextStream &operator <<(QTextStream &s, const Vector2d &r){
-    return s<<r.x<<" "<<r.y;
+QTextStream &operator <<(QTextStream &s, const Vector3d &r){
+    return s<<r.x<<" "<<r.y<<"  "<<r.z;
 }
 
 
